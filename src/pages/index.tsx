@@ -31,9 +31,9 @@ export default function Home() {
           </SignOutButton>}
         </div>
         <SignIn path="/sign-in" routing="path" signUpUrl="/sign-up" />
-        <p className="text-2xl text-white">
+        {/* <p className="text-2xl text-white">
           {hello.data ? hello.data.greeting : "Loading tRPC query..."}
-        </p>
+        </p> */}
 
       </main>
     </>
