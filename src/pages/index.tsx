@@ -1,11 +1,12 @@
-import { SignIn, SignInButton, SignOutButton, SignedOut, useUser } from "@clerk/nextjs";
+import { SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
 import Head from "next/head";
 // import Script from 'next/script'
+import Link from "next/link";
 
 import { api } from "~/utils/api";
 
 export default function Home() {
-  const { data } = api.example.getAll.useQuery();
+  const { data } = api.posts.getAll.useQuery();
 
   const user = useUser();
 
@@ -30,10 +31,10 @@ export default function Home() {
             <button style={{ color: 'skyblue' }}>Sign out with Clerk</button>
           </SignOutButton>}
         </div>
-        <SignIn path="/sign-in" routing="path" signUpUrl="/sign-up" />
-        {/* <p className="text-2xl text-white">
-          {hello.data ? hello.data.greeting : "Loading tRPC query..."}
-        </p> */}
+        <div>
+          {data?.map((post) => (<div key={post.id}>{post.content}</div>
+          ))}
+        </div>
 
       </main>
     </>
