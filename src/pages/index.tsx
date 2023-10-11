@@ -2,6 +2,17 @@ import { SignInButton, SignOutButton, useUser } from "@clerk/nextjs";
 import Head from "next/head";
 // import Script from 'next/script'
 import Link from "next/link";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  NavigationMenuViewport,
+} from "@/components/ui/navigation-menu"
+
 
 import { api } from "~/utils/api";
 
@@ -18,24 +29,20 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       {/* <Script src="http://localhost:8097" /> */}
-      <main className="">
+      <main className="flex justify-center h-screen">
 
-        <div>
-          {/* // DISPLAY IF USER IS SIGNED OUT */}
-          {!user.isSignedIn && <SignInButton>
-            <button style={{ color: 'skyblue' }}>Sign in with Clerk</button>
-          </SignInButton>}
 
-          {/* // DISPLAY IF USER IS SIGNED IN */}
-          {!!user.isSignedIn && <SignOutButton>
-            <button style={{ color: 'skyblue' }}>Sign out with Clerk</button>
-          </SignOutButton>}
+        <div className="bg-purple-500 h-full w-full md:max-w-2xl border-x border-slate-400">
+          
+          <div className="flex border-b border-slate-400 p-4">
+            {!user.isSignedIn && <div className="flex justify-right"><SignInButton /></div>}
+            {!!user.isSignedIn && <div className="flex justify-right"><SignOutButton /></div>}
+          </div>
+          <div>
+            {data?.map((post) => (<div key={post.id}>{post.content}</div>
+            ))}
+          </div>
         </div>
-        <div>
-          {data?.map((post) => (<div key={post.id}>{post.content}</div>
-          ))}
-        </div>
-
       </main>
     </>
   );
